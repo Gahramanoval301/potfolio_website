@@ -1,3 +1,6 @@
+@import url("./about_page.css");
+@import url("./education.css");
+
 @font-face {
   font-family: "Poppins";
   src: url("../../sources/Poppins/Poppins-Regular.ttf");
