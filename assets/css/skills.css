@@ -13,16 +13,22 @@
   gap: 2rem;
 }
 .skills-row .skills-column {
-  border: 1px solid red;
-  padding: 1.5rem 0;
+  border: 1px solid var(--main-color--);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.365);
+  padding: 3rem 2rem 3rem 0;
+  border-radius: 3rem;
+  transition: 1s;
+}
+.skills-row .skills-column:hover {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.553),
+    0 0 30px var(--main-color--);
 }
 .skills-column .title {
   font-size: 2.5rem;
   margin: 0 0 1rem 2rem;
   color: var(--main-color--);
 }
-.skills-column .skills-box {
-}
+
 .skills-box .skills-content {
   position: relative;
   padding-left: 2rem;
@@ -39,6 +45,14 @@
   padding: 0 1rem;
   background-color: rgba(255, 255, 255, 0.171);
   border-radius: 1rem;
+  transition: 500ms;
+}
+.skills-content .progress:hover {
+  transform: scale(1.1);
+}
+.skills-content .progress i {
+  color: var(--main-color--);
+  transition: 0.5s;
 }
 .skills-content .progressing {
   background-color: rgba(165, 42, 42, 0.5);
@@ -46,5 +60,17 @@
 @media screen and (max-width: 768px) {
   .skills-row {
     grid-template-columns: 1fr;
+  }
+}
+.skills-content .progress:hover i {
+  text-shadow: 0 0 10px var(--main-color--);
+}
+
+.skills-content .progressing i {
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
   }
 }
