@@ -6,6 +6,11 @@
   min-height: auto;
   padding-bottom: 5rem;
 }
+.skills h2 {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .skills-row {
   width: 100%;
   display: grid;
@@ -24,11 +29,15 @@
     0 0 30px var(--main-color--);
 }
 .skills-column .title {
+  position: relative;
+  display: inline-block;
   font-size: 2.5rem;
   margin: 0 0 1rem 2rem;
   color: var(--main-color--);
 }
-
+.skills-column .skills-box {
+  position: relative;
+}
 .skills-box .skills-content {
   position: relative;
   padding-left: 2rem;
