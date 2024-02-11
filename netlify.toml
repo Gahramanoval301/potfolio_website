@@ -1,8 +1,8 @@
   [[redirects]]
-  from = "/*"
+  from = "/"
   to = "/assets/html/index.html"
   status = 200
-  
+
 [[redirects]]
   from = "/style.css"
   to = "/assets/css/style.css"
