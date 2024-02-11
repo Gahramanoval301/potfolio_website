@@ -1,8 +1,4 @@
-  [[redirects]]
-  from = "/*"
-  to = "/assets/html/index.html"
-  status = 200
-
+# Redirect specific files directly
 [[redirects]]
   from = "/style.css"
   to = "/assets/css/style.css"
@@ -14,4 +10,7 @@
   status = 200
 
 # Redirect all other paths to index.html
-
+[[redirects]]
+  from = "/*"
+  to = "/assets/html/index.html"
+  status = 200
