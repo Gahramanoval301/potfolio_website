@@ -1,0 +1,2 @@
+# Redirect everything under the root to the portfolio_website folder
+/*    /portfolio_website/:splat    200
