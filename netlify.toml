@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/*"
-to = "/assets/html/index.html"
+to = "/assets/css/about_page.css"
 status = 200
