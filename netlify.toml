@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/about_page.css"
-  to = "/assets/css/about_page.css"
+  from = "/style.css"
+  to = "/assets/css/style.css"
   status = 200
 
 [[redirects]]
@@ -8,6 +8,7 @@
   to = "/assets/js/script.js"
   status = 200
 
+# Redirect all other paths to index.html
 [[redirects]]
   from = "/*"
   to = "/assets/html/index.html"
