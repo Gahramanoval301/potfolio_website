@@ -2,6 +2,7 @@
 @import url("./education.css");
 @import url("./skills.css");
 @import url("./contact.css");
+@import url("./websites.css");
 
 @font-face {
   font-family: "Poppins";
@@ -31,6 +32,12 @@ html {
 body {
   background-color: var(--bg-color--);
   color: var(--text-color--);
+}
+::selection{
+  background-color: var(--main-color--);
+  color: var(--text-color--);
+
+  
 }
 .header {
   position: fixed;
@@ -458,7 +465,7 @@ section {
 #menu-icon .animate,
 .home.show-animate .animate {
   animation: showRight 1s ease forwards;
-  animation-delay: calc(0.3s * var(--i));
+  animation-delay: calc(0.2s * var(--i));
 }
 
 .animate.scroll {
