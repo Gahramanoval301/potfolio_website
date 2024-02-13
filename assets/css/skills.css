@@ -45,7 +45,7 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
-.skills-content .progress {
+.progress {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,14 +56,14 @@
   border-radius: 1rem;
   transition: 500ms;
 }
-.skills-content .progress:hover {
+.progress:hover {
   transform: scale(1.1);
 }
-.skills-content .progress i {
+.progress i {
   color: var(--main-color--);
   transition: 0.5s;
 }
-.skills-content .progressing {
+.progressing {
   background-color: rgba(165, 42, 42, 0.5);
 }
 @media screen and (max-width: 768px) {
@@ -71,11 +71,11 @@
     grid-template-columns: 1fr;
   }
 }
-.skills-content .progress:hover i {
+.progress:hover i {
   text-shadow: 0 0 10px var(--main-color--);
 }
 
-.skills-content .progressing i {
+.progressing i {
   animation: rotate 1s infinite linear;
 }
 @keyframes rotate {
