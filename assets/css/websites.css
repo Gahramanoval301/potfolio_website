@@ -66,7 +66,7 @@
   transform: scale(1.05);
 }
 .project-box .info-box {
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 5rem;
 }
 .project-box .info-box .heading {
   text-align: center;
@@ -98,8 +98,20 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
-.info a { 
+#page-link {
   color: var(--main-color--);
   text-decoration: underline;
-  align-self: flex-end;
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}
+@media screen and (max-width: 1100px) {
+  .my-projects .projects-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 700px) {
+  .my-projects .projects-container {
+    grid-template-columns: 1fr;
+  }
 }
