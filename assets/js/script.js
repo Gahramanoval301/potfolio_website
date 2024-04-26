@@ -59,11 +59,11 @@ readMore.onclick = () => {
 
 
 document.querySelector("form").addEventListener("submit", function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     const fullName = document.getElementById('fullname').value;
     const phoneNumber = document.getElementById('number').value;
     const email = document.getElementById('email').value;
-    const emailSubject = document.getElementById('email-subject').value;
+    const emailSubject = document.getElementById('subject').value;
     const message = document.getElementById('message').value;
 
     // Regular expressions
