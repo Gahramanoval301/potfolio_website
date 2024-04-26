@@ -11,7 +11,8 @@ app.set("port", port);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'index.html')))
-app.use(express.static('./assets'))
+app.use(express.static('./assets/css/about_page.css'))
+
 
 //Route 
 
@@ -28,10 +29,12 @@ app.post('/send_email', (req, res) => {
     var to = 'gahramanovalamann@gmail.com'
 
     var transporter = nodemailer.createTransport({
+        port: 465,
+        secure: true,
         service: 'gmail',
         auth: {
             user: "gahramanovalamann@gmail.com",
-            pass: ''
+            pass: 'mttzdglfxomgvnmi'
         }
     })
 
@@ -39,7 +42,7 @@ app.post('/send_email', (req, res) => {
         from: email,
         to: to,
         subject: subject,
-        text: message
+        text: `${message}, number:${number}, fullName:${fullname}`
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -47,8 +50,9 @@ app.post('/send_email', (req, res) => {
             console.log(error);
         } else {
             console.log(`Email send: ${info.response}`);
+            console.log(info);
         }
-        express.response.redirect("/")
+        express.res.redirect("/")
     })
 
 
