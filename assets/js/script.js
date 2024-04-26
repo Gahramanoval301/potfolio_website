@@ -45,3 +45,50 @@ window.onscroll = () => {
 
     // footer.classList.toggle('show-animate', this.innerHeight + this.scrollY >= document.scrollingElement.scrollHeight);
 }
+// -------------------->Read More
+
+let readMore = document.querySelector('.read-more');
+let aboutContent = document.querySelector('.about-me');
+console.log(aboutContent, readMore);
+readMore.onclick = () => {
+    aboutContent.classList.toggle('show');
+    aboutContent.classList.toggle('active');
+}
+
+//* -------------------->Form Validation Front
+
+
+document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const fullName = document.getElementById('fullname').value;
+    const phoneNumber = document.getElementById('number').value;
+    const email = document.getElementById('email').value;
+    const emailSubject = document.getElementById('email-subject').value;
+    const message = document.getElementById('message').value;
+
+    // Regular expressions
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var nameRegex = /^[a-zA-Z\s]*$/;
+    var mobileRegex =  /^\+?\d{1,3}\d{9}$/;
+;
+
+    // Validate fields
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    if (!nameRegex.test(fullName)) {
+        alert("Please enter a valid full name (only alphabets and spaces).");
+        return;
+    }
+
+    if (!mobileRegex.test(phoneNumber)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+
+    // If all fields are valid, you can proceed with form submission or further processing
+    alert("Form submitted successfully!");
+});
+
