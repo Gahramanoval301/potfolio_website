@@ -7,9 +7,9 @@ const { readFileSync } = require('fs');
 var app = express();
 var server = http.Server(app);
 const port = process.env.PORT || 5000;
+let REACT_APP_DEV_URI = 'http://localhost:5000'
+let REACT_APP_PROD_URI = 'https://potfolio-website-peach.vercel.app'
 let URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
-REACT_APP_DEV_URI = 'http://localhost:5000'
-REACT_APP_PROD_URI = 'https://potfolio-website-peach.vercel.app'
 
 app.set("port", port);
 app.use(express.json());
