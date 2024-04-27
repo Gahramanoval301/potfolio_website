@@ -6,7 +6,7 @@ const { readFileSync } = require('fs');
 
 var app = express();
 var server = http.Server(app);
-var port = 5000;
+const port = process.env.PORT || 5000;;
 
 app.set("port", port);
 app.use(express.json());
@@ -68,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 //Form Route and NodeMailer
-app.post('/send_email', (req, res) => {
+app.post( '/send_email', (req, res) => {
     var fullname = req.body.fullname
     var email = req.body.email
     var number = req.body.number
