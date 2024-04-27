@@ -49,7 +49,6 @@ window.onscroll = () => {
 
 let readMore = document.querySelector('.read-more');
 let aboutContent = document.querySelector('.about-me');
-console.log(aboutContent, readMore);
 readMore.onclick = () => {
     aboutContent.classList.toggle('show');
     aboutContent.classList.toggle('active');
