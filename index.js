@@ -6,7 +6,10 @@ const { readFileSync } = require('fs');
 
 var app = express();
 var server = http.Server(app);
-const port = process.env.PORT || 5000;;
+const port = process.env.PORT || 5000;
+let URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
+REACT_APP_DEV_URI = 'http://www.localhost:3000'
+REACT_APP_PROD_URI = 'https://potfolio-website-peach.vercel.app'
 
 app.set("port", port);
 app.use(express.json());
@@ -68,7 +71,7 @@ app.use((req, res, next) => {
 });
 
 //Form Route and NodeMailer
-app.post( '/send_email', (req, res) => {
+app.post(`${URI}/send_email`, (req, res) => {
     var fullname = req.body.fullname
     var email = req.body.email
     var number = req.body.number
