@@ -68,8 +68,6 @@ app.use((req, res, next) => {
 });
 
 //Form Route and NodeMailer
-
-
 app.post(`/send_email`, (req, res) => {
     var fullname = req.body.fullname
     var email = req.body.email
@@ -77,29 +75,33 @@ app.post(`/send_email`, (req, res) => {
     var subject = req.body.subject
     var message = req.body.message
     var to = 'gahramanovalamann@gmail.com'
+    console.log('it works');
 
-   let sendmail = async (req) => {
-        let transporter = nodemailer.createTransport({
-            port: 465,
-            host: 'smtp.gmail.com',
-            tls: {
-                ciphers: "SSLv3",
-            },
-            secure: true,
-            service: 'gmail',
-            auth: {
-                user: "gahramanovalamann@gmail.com",
-                pass: 'mttzdglfxomgvnmi'
-            }
-        });
-        var mailOptions = {
-            from: email,
-            to: to,
-            subject: subject,
-            text: `${message}, number:${number}, fullName:${fullname}`
-        };
-        let resp = false;
-        await transporter.sendMail(mailOptions, function (error, info) {
+    var transporter = nodemailer.createTransport({
+        port: 465,
+        host: 'smtp.gmail.com',
+        tls: {
+            ciphers: "SSLv3",
+        },
+        secure: true,
+        service: 'gmail',
+        auth: {
+            user: "gahramanovalamann@gmail.com",
+            pass: 'mttzdglfxomgvnmi'
+        }
+    })
+    console.log('it works');
+
+    var mailOptions = {
+        from: email,
+        to: to,
+        subject: subject,
+        text: `${message}, number:${number}, fullName:${fullname}`
+    }
+
+    new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, function (error, info) {
+            console.log('it works');
             if (error) {
                 console.log(error);
                 reject(error);
@@ -107,11 +109,12 @@ app.post(`/send_email`, (req, res) => {
                 console.log(`Email send: ${info.response}`);
                 resolve(info);
             }
+            console.log('it works');
             res.redirect("/")
-        });
-        return resp;
-    };
-    sendmail();
+        })
+    }).then((data) => {
+        console.log(data, 'promise');
+    })
 
 })
 //initialize web server
