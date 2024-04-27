@@ -2,6 +2,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var nodemailer = require('nodemailer');
+const { readFileSync } = require('fs');
 
 var app = express();
 var server = http.Server(app);
@@ -11,15 +12,63 @@ app.set("port", port);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'index.html')))
-app.use(express.static('./assets/css/about_page.css'))
 
 
-//Route 
+//Serving files of my project
+app.use((req, res, next) => {
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-})
+    if (req.url === '/send_email') {
+        // If the request is for sending an email, skip the file serving logic
+        return next(); // Move to the next middleware
+    }
+    const extension = path.extname(req.url);
 
+    let contentType;
+    switch (extension) {
+        case '.css':
+            contentType = 'text/css';
+            break;
+        case '.jpeg':
+            contentType = 'image/jpeg';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;
+        case '.woff2':
+            contentType = 'font/woff2';
+            break;
+        case '.ttf':
+            contentType = 'font/ttf';
+            break;
+        case '.pdf':
+            contentType = 'application/pdf';
+            break;
+        default:
+            contentType = 'text/html';
+            break;
+    }
+
+    let filePath;
+    console.log(req.url);
+    if (contentType === 'text/html' && req.url === '/') {
+        filePath = path.join(__dirname, 'index.html');
+    } else {
+        filePath = path.join(__dirname, req.url);
+    }
+
+
+    try {
+        const data = readFileSync(filePath,
+            !contentType.includes('image') && !contentType.includes('font') ? 'utf8' : '');
+        res.setHeader('Content-Type', contentType);
+        res.send(data);
+    } catch (error) {
+        console.error('Error reading file:', error);
+        res.status(404).send('404 Not Found');
+    }
+});
+
+//Form Route and NodeMailer
 app.post('/send_email', (req, res) => {
     var fullname = req.body.fullname
     var email = req.body.email
@@ -50,9 +99,9 @@ app.post('/send_email', (req, res) => {
             console.log(error);
         } else {
             console.log(`Email send: ${info.response}`);
-            console.log(info);
+            console.log(info, 'info');
         }
-        express.res.redirect("/")
+        express.response.redirect("/")
     })
 
 
