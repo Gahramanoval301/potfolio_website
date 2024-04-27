@@ -7,9 +7,6 @@ const { readFileSync } = require('fs');
 var app = express();
 var server = http.Server(app);
 const port = process.env.PORT || 5000;
-let REACT_APP_DEV_URI = 'http://localhost:5000'
-let REACT_APP_PROD_URI = 'https://potfolio-website-peach.vercel.app'
-let URI = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_URI : process.env.REACT_APP_PROD_URI;
 
 app.set("port", port);
 app.use(express.json());
@@ -71,7 +68,9 @@ app.use((req, res, next) => {
 });
 
 //Form Route and NodeMailer
-app.post(`${URI}/send_email`, (req, res) => {
+
+
+app.post(`/send_email`, (req, res) => {
     var fullname = req.body.fullname
     var email = req.body.email
     var number = req.body.number
@@ -79,29 +78,28 @@ app.post(`${URI}/send_email`, (req, res) => {
     var message = req.body.message
     var to = 'gahramanovalamann@gmail.com'
 
-    var transporter = nodemailer.createTransport({
-        port: 465,
-        host: 'smtp.gmail.com',
-        tls: {
-            ciphers: "SSLv3",
-        },
-        secure: true,
-        service: 'gmail',
-        auth: {
-            user: "gahramanovalamann@gmail.com",
-            pass: 'mttzdglfxomgvnmi'
-        }
-    })
-
-    var mailOptions = {
-        from: email,
-        to: to,
-        subject: subject,
-        text: `${message}, number:${number}, fullName:${fullname}`
-    }
-
-    new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, function (error, info) {
+   let sendmail = async (req) => {
+        let transporter = nodemailer.createTransport({
+            port: 465,
+            host: 'smtp.gmail.com',
+            tls: {
+                ciphers: "SSLv3",
+            },
+            secure: true,
+            service: 'gmail',
+            auth: {
+                user: "gahramanovalamann@gmail.com",
+                pass: 'mttzdglfxomgvnmi'
+            }
+        });
+        var mailOptions = {
+            from: email,
+            to: to,
+            subject: subject,
+            text: `${message}, number:${number}, fullName:${fullname}`
+        };
+        let resp = false;
+        await transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
                 reject(error);
@@ -110,10 +108,10 @@ app.post(`${URI}/send_email`, (req, res) => {
                 resolve(info);
             }
             res.redirect("/")
-        })
-    }).then((data) => {
-        console.log(data, 'promise');
-    })
+        });
+        return resp;
+    };
+    sendmail();
 
 })
 //initialize web server
