@@ -78,6 +78,7 @@ app.post('/send_email', (req, res) => {
 
     var transporter = nodemailer.createTransport({
         port: 465,
+        host: 'smtp.gmail.com',
         tls: {
             ciphers: "SSLv3",
         },
@@ -103,15 +104,13 @@ app.post('/send_email', (req, res) => {
                 reject(error);
             } else {
                 console.log(`Email send: ${info.response}`);
-                console.log(info, 'info');
                 resolve(info);
             }
-            express.response.redirect("/")
+            res.redirect("/")
         })
     }).then((data) => {
         console.log(data, 'promise');
-     })
-
+    })
 
 })
 //initialize web server
