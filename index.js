@@ -49,7 +49,6 @@ app.use((req, res, next) => {
     }
 
     let filePath;
-    console.log(req.url);
     if (contentType === 'text/html' && req.url === '/') {
         filePath = path.join(__dirname, 'index.html');
     } else {
@@ -59,7 +58,7 @@ app.use((req, res, next) => {
 
     try {
         const data = readFileSync(filePath,
-            !contentType.includes('image') && !contentType.includes('font') ? 'utf8' : '');
+            !contentType.includes('image') && !contentType.includes('font') && !contentType.includes('pdf') ? 'utf8' : '');
         res.setHeader('Content-Type', contentType);
         res.send(data);
     } catch (error) {
@@ -79,6 +78,9 @@ app.post('/send_email', (req, res) => {
 
     var transporter = nodemailer.createTransport({
         port: 465,
+        tls: {
+            ciphers: "SSLv3",
+        },
         secure: true,
         service: 'gmail',
         auth: {
@@ -94,15 +96,21 @@ app.post('/send_email', (req, res) => {
         text: `${message}, number:${number}, fullName:${fullname}`
     }
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log(`Email send: ${info.response}`);
-            console.log(info, 'info');
-        }
-        express.response.redirect("/")
-    })
+    new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log(`Email send: ${info.response}`);
+                console.log(info, 'info');
+                resolve(info);
+            }
+            express.response.redirect("/")
+        })
+    }).then((data) => {
+        console.log(data, 'promise');
+     })
 
 
 })
