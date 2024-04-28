@@ -87,19 +87,19 @@ app.post(`/send_email`, (req, res) => {
         service: 'gmail',
         auth: {
             user: "gahramanovalamann@gmail.com",
-            pass: 'mttzdglfxomgvnmi'
+            pass: 'jednjdned'
         }
     })
     console.log('it works');
 
-    var mailOptions = {
-        from: email,
-        to: to,
-        subject: subject,
-        text: `${message}, number:${number}, fullName:${fullname}`
-    }
 
     new Promise((resolve, reject) => {
+        var mailOptions = {
+            from: email,
+            to: to,
+            subject: subject,
+            text: `${message}, number:${number}, fullName:${fullname}`
+        }
         transporter.sendMail(mailOptions, function (error, info) {
             console.log('it works');
             if (error) {
