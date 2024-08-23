@@ -233,6 +233,19 @@ section {
   transition: 1s;
 }
 
+.github_project {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: #00abf0;
+  margin: 2px;
+  font-size: 16px;
+}
+
+.github_project:hover {
+  opacity: 0.9;
+}
+
 .btn-box .btn:hover::before {
   width: 100%;
 }
@@ -240,7 +253,7 @@ section {
 .home-sci {
   position: absolute;
   bottom: 4rem;
-  width: 170px;
+  width: 230px;
   display: flex;
   justify-content: space-between;
 }
@@ -460,6 +473,10 @@ section {
     pointer-events: none;
     background-color: var(--bg-color--);
     opacity: 0.6;
+  }
+
+  .home-imgHover .imgaggee {
+    width: 20px;
   }
 }
 
